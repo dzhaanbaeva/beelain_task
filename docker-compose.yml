@@ -1,0 +1,24 @@
+version: '3'
+services:
+  server-discovery:
+    image: discovery
+    ports:
+      - 8761:8761
+  diagnosis-sevice:
+    image: diagnosis
+    ports:
+       - 8083:8083
+    depends_on:
+       - server-discovery
+  service-patient:
+    image: patient
+    ports:
+      - 8081:8081
+    depends_on:
+      - server-discovery
+  doctor-service:
+      image: doctor
+      ports:
+        - 8080:8080
+      depends_on:
+        - server-discovery
